@@ -1,0 +1,25 @@
+import UIKit
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Buton oluştur
+        let button = UIButton(type: .system)
+        button.setTitle("Respring Yap", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.frame = CGRect(x: 50, y: 200, width: 300, height: 60)
+        button.center.x = self.view.center.x
+        button.addTarget(self, action: #selector(respringDevice), for: .touchUpInside)
+        view.addSubview(button)
+    }
+
+    @objc func respringDevice() {
+        // Jailbreak yapılmış cihazlarda SpringBoard'u yeniden başlatmak için:
+        let task = Process()
+        task.launchPath = "/usr/bin/killall"
+        task.arguments = ["SpringBoard"]
+        task.launch()
+    }
+}
